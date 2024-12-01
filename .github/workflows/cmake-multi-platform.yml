@@ -70,6 +70,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install dependencies (Ubuntu, Debian)
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'debian-latest'
+      run: sudo apt-get install -y libcurl4-openssl-dev
+
+    - name: Install dependencies (Arch)
+      if: matrix.os == 'arch-latest'
+      run: sudo pacman -S --noconfirm curl
+
+    - name: Install dependencies (NixOS)
+      if: matrix.os == 'nixos-latest'
+      run: nix-env -iA nixos.curl
+
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
