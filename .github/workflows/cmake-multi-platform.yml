@@ -69,6 +69,7 @@ jobs:
         choco install curl
         setx CURL_INCLUDE_DIR "C:\Program Files\curl\include"
         setx CURL_LIBRARY "C:\Program Files\curl\lib"
+        setx PATH "%PATH%;C:\Program Files\curl\bin"
 
     - name: Install dependencies (Ubuntu, Debian)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'debian-latest'
